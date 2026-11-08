@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Vennela! 🌸 A Baby Pink Wonderland</title>
+  <meta name="description" content="An interactive, cinematic baby-pink birthday wonderland created especially for Vennela.">
+  <meta name="theme-color" content="#ffe4e9">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. ATMOSPHERE, CANVAS & CUSTOM CURSOR (BABY PINK)
+       ====================================================================== -->
+  <!-- Interactive Custom Desktop Cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Ambient Glowing Background Orbs -->
+  <div class="ambient-orb ambient-orb-1" aria-hidden="true"></div>
+  <div class="ambient-orb ambient-orb-2" aria-hidden="true"></div>
+  <div class="ambient-orb ambient-orb-3" aria-hidden="true"></div>
+
+  <!-- Background Canvas: Floating Petals, Stars & Fireflies -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Foreground Canvas: Confetti & Aerial Fireworks -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- Fullscreen Portal Curtain Transition -->
+  <div class="portal-transition" aria-hidden="true"></div>
+
+  <!-- ======================================================================
+       2. TOP AUDIO CONTROLLER WIDGET
+       ====================================================================== -->
+  <header class="audio-controller-widget" role="region" aria-label="Audio Controls">
+    <button id="disc-btn" class="disc-btn" title="Toggle Magical Melody" aria-label="Toggle Music">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </button>
+    <div class="audio-controls-tray">
+      <div class="audio-equalizer" aria-hidden="true">
+        <span class="eq-bar bar-1"></span>
+        <span class="eq-bar bar-2"></span>
+        <span class="eq-bar bar-3"></span>
+        <span class="eq-bar bar-4"></span>
+      </div>
+      <span class="audio-label">Melody</span>
+      <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.05" value="0.5" title="Volume">
+      <button id="btn-mute-fx" class="btn-mute-fx" title="Toggle Sound FX" aria-label="Toggle Sound FX">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- HTML5 Audio Fallback: Place your own custom MP3 in assets/audio/birthday-melody.mp3 if desired -->
+  <audio id="bg-music-player" loop preload="none">
+    <source src="assets/audio/birthday-melody.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ======================================================================
+       3. MAIN EXPERIENCE CONTAINER (6 STAGES)
+       ====================================================================== -->
+  <main class="app-container">
+
+    <!-- --------------------------------------------------------------------
+         STAGE 1: KEYPAD PASSWORD GATEWAY (0811 ON-SCREEN NUMERIC PAD)
+         -------------------------------------------------------------------- -->
+    <section id="stage-password" class="stage-section">
+      <div class="lock-card-wrapper">
+        <div class="lock-card">
+          <!-- 3D Floating Mystery Gift -->
+          <div class="floating-gift-3d">
+            <div class="gift-sphere-glow"></div>
+            <svg class="gift-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="1.8">
+              <path d="M20 12v10H4V12"></path>
+              <path d="M2 7h20v5H2z"></path>
+              <path d="M12 22V7"></path>
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+            </svg>
+          </div>
+
+          <div class="vip-badge">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Private Celebration
+          </div>
+
+          <h1 class="lock-title">Enter Birthday PIN</h1>
+          <p class="lock-subtitle">Tap the on-screen keypad to enter her special day (DDMM).</p>
+
+          <!-- PIN Indicator Dots -->
+          <div class="pin-display-wrapper">
+            <div class="pin-dots-container" aria-label="PIN Dots Display">
+              <span class="pin-dot" id="dot-0"></span>
+              <span class="pin-dot" id="dot-1"></span>
+              <span class="pin-dot" id="dot-2"></span>
+              <span class="pin-dot" id="dot-3"></span>
+            </div>
+            <p class="error-message">Oops! Enter your date of birth: 0811 🌸</p>
+          </div>
+
+          <!-- On-Screen Numeric Keypad -->
+          <div class="on-screen-keypad" role="group" aria-label="PIN Keypad">
+            <button type="button" class="keypad-btn" data-key="1">1</button>
+            <button type="button" class="keypad-btn" data-key="2">2</button>
+            <button type="button" class="keypad-btn" data-key="3">3</button>
+
+            <button type="button" class="keypad-btn" data-key="4">4</button>
+            <button type="button" class="keypad-btn" data-key="5">5</button>
+            <button type="button" class="keypad-btn" data-key="6">6</button>
+
+            <button type="button" class="keypad-btn" data-key="7">7</button>
+            <button type="button" class="keypad-btn" data-key="8">8</button>
+            <button type="button" class="keypad-btn" data-key="9">9</button>
+
+            <button type="button" class="keypad-btn key-action" id="key-delete" aria-label="Delete">⌫</button>
+            <button type="button" class="keypad-btn" data-key="0">0</button>
+            <button type="button" class="keypad-btn key-action key-submit" id="key-enter" aria-label="Submit">✨</button>
+          </div>
+
+          <p class="hint-text">
+            Hint: <span class="hint-highlight" id="hint-dob" title="Click to auto-enter 0811">Your Date of Birth (0811) 🎂</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------------------
+         STAGE 2: THE PLAYFUL MOVING BUTTON (INTERACTIVE DODGE)
+         -------------------------------------------------------------------- -->
+    <section id="stage-moving-button" class="stage-section hidden-stage">
+      <div class="moving-header">
+        <div class="badge-playful">Curiosity Challenge</div>
+        <h2 class="moving-title">Wait a second! Are you ready?</h2>
+        <p class="moving-subtitle">Catch the magical button to unlock Vennela's birthday world! 😉</p>
+      </div>
+
+      <!-- Dodge Arena Container -->
+      <div class="dodge-arena">
+        <div id="button-speech-bubble" class="speech-bubble">Catch me! 😜</div>
+        <button id="elusive-btn" class="moving-btn" type="button">
+          <span>Catch Me! 💖</span>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+      </div>
+
+      <p class="attempt-counter"><span id="dodge-attempts-left">6 dodges left</span> before surrender!</p>
+    </section>
+
+    <!-- --------------------------------------------------------------------
+         STAGE 3: THE GRAND CELEBRATION (HERO & INTERACTIVE CAKE)
+         -------------------------------------------------------------------- -->
+    <section id="stage-celebration" class="stage-section hidden-stage">
+      <!-- Floating Balloons -->
+      <div class="balloon-container" aria-hidden="true">
+        <div class="balloon balloon-1"><div class="balloon-string"></div></div>
+        <div class="balloon balloon-2"><div class="balloon-string"></div></div>
+        <div class="balloon balloon-3"><div class="balloon-string"></div></div>
+        <div class="balloon balloon-4"><div class="balloon-string"></div></div>
+      </div>
+
+      <div class="celebration-hero">
+        <div class="tagline-greeting">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Celebrating An Extraordinary Soul
+        </div>
+        <h1 class="heading-happy">Happy Birthday,</h1>
+        <div class="heading-name-wrapper">
+          <span class="heading-name">Vennela</span>
+        </div>
+        <p class="celebration-subtext">
+          Today is all about you! A day filled with joy, golden smiles, sweet surprises, and all the love your heart can hold.
+        </p>
+      </div>
+
+      <!-- Interactive Birthday Cake with Blowable Candles -->
+      <div class="cake-stage-container">
+        <div class="interactive-cake-box" title="Click to blow candles & make a wish!">
+          <svg class="cake-svg-wrapper" viewBox="0 0 300 300">
+            <defs>
+              <radialGradient id="cakePlateGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#fce7f3" stop-opacity="0.7"/>
+              </radialGradient>
+              <linearGradient id="cakeTier1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f472b6"/>
+                <stop offset="50%" stop-color="#fbcfe8"/>
+                <stop offset="100%" stop-color="#ec4899"/>
+              </linearGradient>
+              <linearGradient id="cakeTier2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#fda4af"/>
+                <stop offset="50%" stop-color="#ffe4e6"/>
+                <stop offset="100%" stop-color="#fb7185"/>
+              </linearGradient>
+              <linearGradient id="cakeFrosting" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#fff0f5"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Plate -->
+            <ellipse cx="150" cy="265" rx="130" ry="20" fill="url(#cakePlateGrad)"/>
+
+            <!-- Bottom Tier -->
+            <path d="M 50,220 C 50,240 250,240 250,220 L 250,250 C 250,270 50,270 50,250 Z" fill="url(#cakeTier1)"/>
+            <ellipse cx="150" cy="220" rx="100" ry="18" fill="url(#cakeFrosting)"/>
+
+            <!-- Middle Tier -->
+            <path d="M 75,170 C 75,188 225,188 225,170 L 225,200 C 225,218 75,218 75,200 Z" fill="url(#cakeTier2)"/>
+            <ellipse cx="150" cy="170" rx="75" ry="14" fill="url(#cakeFrosting)"/>
+
+            <!-- Top Tier -->
+            <path d="M 100,125 C 100,140 200,140 200,125 L 200,152 C 200,167 100,167 100,152 Z" fill="url(#cakeTier1)"/>
+            <ellipse cx="150" cy="125" rx="50" ry="10" fill="url(#cakeFrosting)"/>
+
+            <!-- 3 Glowing Candles -->
+            <rect x="122" y="90" width="6" height="30" rx="3" fill="#fef08a"/>
+            <circle class="flame flame-1" cx="125" cy="80" r="7" fill="#f59e0b"/>
+            <ellipse class="flame-smoke" cx="125" cy="72" rx="4" ry="8" fill="#cbd5e1"/>
+
+            <rect x="147" y="82" width="6" height="38" rx="3" fill="#facc15"/>
+            <circle class="flame flame-2" cx="150" cy="70" r="8" fill="#f59e0b"/>
+            <ellipse class="flame-smoke" cx="150" cy="62" rx="5" ry="10" fill="#cbd5e1"/>
+
+            <rect x="172" y="90" width="6" height="30" rx="3" fill="#fef08a"/>
+            <circle class="flame flame-3" cx="175" cy="80" r="7" fill="#f59e0b"/>
+            <ellipse class="flame-smoke" cx="175" cy="72" rx="4" ry="8" fill="#cbd5e1"/>
+          </svg>
+        </div>
+
+        <div>
+          <button id="btn-blow-candles" class="btn-blow-candles">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+            </svg>
+            <span>Make a Wish & Blow the Candles!</span>
+          </button>
+          <button id="btn-fireworks" class="btn-fireworks" title="Launch Aerial Fireworks">
+            <span>🎆 Fireworks Show</span>
+          </button>
+        </div>
+
+        <div class="wish-granted-badge">
+          ✨ May all your wildest dreams come true, Vennela! ✨
+        </div>
+      </div>
+
+      <!-- Quick Exploration Cards -->
+      <div class="stage-cards-grid">
+        <div class="jump-card" data-stage="stage-gallery">
+          <div class="jump-card-icon">📸</div>
+          <div class="jump-card-text">
+            <h4>Memories Gallery</h4>
+            <p>Cherished moments & timeless smiles</p>
+          </div>
+        </div>
+        <div class="jump-card" data-stage="stage-message">
+          <div class="jump-card-icon">💌</div>
+          <div class="jump-card-text">
+            <h4>Heartfelt Words</h4>
+            <p>A message written just for you</p>
+          </div>
+        </div>
+        <div class="jump-card" data-stage="stage-gift">
+          <div class="jump-card-icon">🎁</div>
+          <div class="jump-card-text">
+            <h4>The Mystery Gift</h4>
+            <p>Unwrap your birthday keepsake</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------------------
+         STAGE 4: PHOTO GALLERY (3D POLAROIDS & LIGHTBOX)
+         -------------------------------------------------------------------- -->
+    <section id="stage-gallery" class="stage-section hidden-stage">
+      <div class="section-header">
+        <div class="section-badge">Captured In Time</div>
+        <h2 class="section-title">Moments of Pure Magic</h2>
+        <p class="section-desc">Every smile of yours tells a story full of warmth, radiance, and grace.</p>
+      </div>
+
+      <div class="polaroid-grid">
+        <!-- ============================================================== -->
+        <!-- VENNELA PHOTO 1                                                -->
+        <!-- Replace the image src with your photo path:                   -->
+        <!-- e.g. <img class="polaroid-img" src="assets/images/vennela1.jpg" alt="Vennela"> -->
+        <!-- ============================================================== -->
+        <article class="polaroid-card" data-id="1">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-image-wrapper">
+                <img class="polaroid-img" src="Images/1.jpeg" alt="Vennela - Radiant Sunshine" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-art" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                  <span>Radiant Sunshine</span>
+                  <p>Photo Placeholder 1</p>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <h4>Radiant Sunshine</h4>
+                <p>Her smile that brightens any room</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================== -->
+        <!-- VENNELA PHOTO 2                                                -->
+        <!-- ============================================================== -->
+        <article class="polaroid-card" data-id="2">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-image-wrapper">
+                <img class="polaroid-img" src="Images/2.jpeg" alt="Vennela - Grace & Elegance" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-art" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+                  </svg>
+                  <span>Grace & Elegance</span>
+                  <p>Photo Placeholder 2</p>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <h4>Grace & Elegance</h4>
+                <p>Poise that captures hearts</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================== -->
+        <!-- VENNELA PHOTO 3                                                -->
+        <!-- ============================================================== -->
+        <article class="polaroid-card" data-id="3">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-image-wrapper">
+                <img class="polaroid-img" src="Images/3.jpeg" alt="Vennela - Endless Laughter" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-art" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                  </svg>
+                  <span>Endless Laughter</span>
+                  <p>Photo Placeholder 3</p>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <h4>Endless Laughter</h4>
+                <p>Unfiltered joy and silly moments</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================== -->
+        <!-- VENNELA PHOTO 4                                                -->
+        <!-- ============================================================== -->
+        <article class="polaroid-card" data-id="4">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-image-wrapper">
+                <img class="polaroid-img" src="Images/4.jpeg" alt="Vennela - Unstoppable Spirit" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-art" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                  <span>Unstoppable Spirit</span>
+                  <p>Photo Placeholder 4</p>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <h4>Unstoppable Spirit</h4>
+                <p>Chasing dreams with fierce passion</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================== -->
+        <!-- VENNELA PHOTO 5                                                -->
+        <!-- ============================================================== -->
+        <article class="polaroid-card" data-id="5">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-image-wrapper">
+                <img class="polaroid-img" src="Images/5.jpeg" alt="Vennela - Sweet Serenity" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-art" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                  <span>Sweet Serenity</span>
+                  <p>Photo Placeholder 5</p>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <h4>Sweet Serenity</h4>
+                <p>Quiet peaceful moments of reflection</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============================================================== -->
+        <!-- VENNELA PHOTO 6                                                -->
+        <!-- ============================================================== -->
+        <article class="polaroid-card" data-id="6">
+          <div class="polaroid-inner">
+            <div class="polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-image-wrapper">
+                <img class="polaroid-img" src="Images/6.jpeg" alt="Vennela - The Birthday Queen" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-art" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                  <span>The Birthday Queen</span>
+                  <p>Photo Placeholder 6</p>
+                </div>
+              </div>
+              <div class="polaroid-caption">
+                <h4>The Birthday Queen</h4>
+                <p>Celebrating another glorious year</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Lightbox Modal -->
+      <div class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+        <button class="lightbox-nav-btn lightbox-prev" aria-label="Previous Photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="22" height="22">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="lightbox-nav-btn lightbox-next" aria-label="Next Photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="22" height="22">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="lightbox-content">
+          <button class="lightbox-close-btn" aria-label="Close Lightbox">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <div class="lightbox-img-box">
+            <img id="lightbox-img" src="" alt="Vennela's Memory" style="display: none;">
+          </div>
+          <h3 id="lightbox-title" style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--berry-dark); margin-bottom: 8px;"></h3>
+          <p id="lightbox-caption" style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6;"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------------------
+         STAGE 5: HEARTFELT MESSAGE (CARTOON DELIVERY & WORD-BY-WORD REVEAL)
+         -------------------------------------------------------------------- -->
+    <section id="stage-message" class="stage-section hidden-stage">
+      
+      <!-- Cartoon Messenger Delivery Sequence -->
+      <div class="cartoon-delivery-stage" id="cartoon-delivery-stage">
+        <div class="cartoon-character-wrapper" id="cartoon-character">
+          <div class="cartoon-speech-bubble" id="cartoon-speech">
+            <span>Special Delivery for Vennela! 💌</span>
+          </div>
+
+          <!-- Cute Cupid Bunny SVG -->
+          <svg class="cupid-bunny-svg" viewBox="0 0 200 220" width="160" height="176">
+            <defs>
+              <radialGradient id="bunnyGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="70%" stop-color="#ffe4ec"/>
+                <stop offset="100%" stop-color="#fbcfe8"/>
+              </radialGradient>
+              <radialGradient id="wingGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#fce7f3"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Wings -->
+            <g class="bunny-wings">
+              <path class="wing-left" d="M 50,90 C 15,60 10,120 45,115 Z" fill="url(#wingGrad)" stroke="#f472b6" stroke-width="2"/>
+              <path class="wing-right" d="M 150,90 C 185,60 190,120 155,115 Z" fill="url(#wingGrad)" stroke="#f472b6" stroke-width="2"/>
+            </g>
+
+            <!-- Golden Halo -->
+            <ellipse cx="100" cy="30" rx="35" ry="9" fill="none" stroke="#facc15" stroke-width="4" filter="drop-shadow(0 0 8px #fde047)"/>
+
+            <!-- Bunny Ears -->
+            <ellipse cx="75" cy="55" rx="14" ry="38" transform="rotate(-12 75 55)" fill="url(#bunnyGrad)" stroke="#f472b6" stroke-width="2"/>
+            <ellipse cx="75" cy="55" rx="7" ry="24" transform="rotate(-12 75 55)" fill="#f472b6" opacity="0.4"/>
+
+            <ellipse cx="125" cy="55" rx="14" ry="38" transform="rotate(12 125 55)" fill="url(#bunnyGrad)" stroke="#f472b6" stroke-width="2"/>
+            <ellipse cx="125" cy="55" rx="7" ry="24" transform="rotate(12 125 55)" fill="#f472b6" opacity="0.4"/>
+
+            <!-- Bunny Body -->
+            <ellipse cx="100" cy="140" rx="42" ry="46" fill="url(#bunnyGrad)" stroke="#f472b6" stroke-width="2"/>
+            <ellipse cx="100" cy="145" rx="28" ry="30" fill="#ffffff"/>
+
+            <!-- Bunny Head -->
+            <circle cx="100" cy="100" r="38" fill="url(#bunnyGrad)" stroke="#f472b6" stroke-width="2"/>
+
+            <!-- Rosy Cheeks -->
+            <circle cx="78" cy="112" r="7" fill="#fb7185" opacity="0.5"/>
+            <circle cx="122" cy="112" r="7" fill="#fb7185" opacity="0.5"/>
+
+            <!-- Cute Eyes -->
+            <ellipse class="bunny-eye" cx="84" cy="98" rx="4.5" ry="5.5" fill="#4a152d"/>
+            <circle cx="82" cy="96" r="1.8" fill="#ffffff"/>
+
+            <ellipse class="bunny-eye" cx="116" cy="98" rx="4.5" ry="5.5" fill="#4a152d"/>
+            <circle cx="114" cy="96" r="1.8" fill="#ffffff"/>
+
+            <!-- Nose & Smile -->
+            <polygon points="97,106 103,106 100,109" fill="#f43f5e"/>
+            <path d="M 95,110 Q 100,114 105,110" fill="none" stroke="#4a152d" stroke-width="2" stroke-linecap="round"/>
+
+            <!-- Arms -->
+            <g class="bunny-arms" id="bunny-arms">
+              <ellipse class="arm-left" cx="72" cy="136" rx="9" ry="14" transform="rotate(20 72 136)" fill="url(#bunnyGrad)" stroke="#f472b6" stroke-width="1.8"/>
+              <ellipse class="arm-right" cx="128" cy="136" rx="9" ry="14" transform="rotate(-20 128 136)" fill="url(#bunnyGrad)" stroke="#f472b6" stroke-width="1.8"/>
+            </g>
+
+            <!-- Feet -->
+            <ellipse cx="80" cy="182" rx="14" ry="9" fill="url(#bunnyGrad)" stroke="#f472b6" stroke-width="1.8"/>
+            <ellipse cx="120" cy="182" rx="14" ry="9" fill="url(#bunnyGrad)" stroke="#f472b6" stroke-width="1.8"/>
+          </svg>
+
+          <!-- Flying Envelope -->
+          <div class="flying-envelope-box" id="flying-envelope">
+            <svg viewBox="0 0 100 70" width="85" height="60" filter="drop-shadow(0 8px 18px rgba(244, 63, 104, 0.35))">
+              <rect x="2" y="2" width="96" height="66" rx="8" fill="#ffffff" stroke="#f472b6" stroke-width="3"/>
+              <path d="M 4,4 L 50,40 L 96,4" fill="none" stroke="#f472b6" stroke-width="2.5"/>
+              <circle cx="50" cy="40" r="10" fill="#f43f5e"/>
+              <text x="50" y="44" font-size="11" text-anchor="middle" fill="#ffffff" font-weight="bold">V</text>
+            </svg>
+          </div>
+        </div>
+
+        <button type="button" class="btn-throw-letter" id="btn-throw-letter">
+          <span>💌 Throw Letter to Vennela!</span>
+        </button>
+      </div>
+
+      <!-- The Grand Heartfelt Letter Card (revealed after character throws it) -->
+      <div class="letter-card-container" id="letter-card-container" style="display: none; opacity: 0;">
+        <article class="letter-card">
+          <!-- Cute Mascot in Corner -->
+          <div class="mascot-corner" id="mascot-corner">
+            <div class="mascot-corner-badge">Delivered with Love 💖</div>
+            <svg viewBox="0 0 100 100" width="48" height="48">
+              <circle cx="50" cy="50" r="40" fill="#fff0f5" stroke="#f472b6" stroke-width="2"/>
+              <circle cx="40" cy="48" r="4" fill="#4a152d"/>
+              <circle cx="60" cy="48" r="4" fill="#4a152d"/>
+              <path d="M 45,58 Q 50,64 55,58" fill="none" stroke="#f43f5e" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="54" r="5" fill="#fda4af" opacity="0.6"/>
+              <circle cx="67" cy="54" r="5" fill="#fda4af" opacity="0.6"/>
+            </svg>
+          </div>
+
+          <header class="letter-header">
+            <div class="letter-seal">
+              <div class="wax-seal-icon">V</div>
+              <div class="letter-meta">
+                <h3>To Dearest Vennela,</h3>
+                <p>On This Wonderfully Special Day</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button id="btn-replay-delivery" class="btn-replay-letter" title="Replay cartoon delivery">
+                <span>Replay Delivery 💌</span>
+              </button>
+              <button id="btn-replay-letter" class="btn-replay-letter" title="Replay words reveal">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="1 4 1 10 7 10"></polyline>
+                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+                <span>Replay Words</span>
+              </button>
+            </div>
+          </header>
+
+          <div class="letter-body">
+            Happy Birthday, Vennela! Some people bring a gentle light wherever they walk, and you are truly one of them. Your kindness, your contagious laughter, and your boundless warmth make every single ordinary day feel like a magical celebration. As you step into this beautiful new chapter of your life, I hope all your sweetest hopes take flight. May every path you choose lead you to extraordinary success, deep peace, and boundless wonder. Keep dreaming boldly, laughing freely, and glowing with that unmatched radiance that makes you so effortlessly unforgettable. The world is so much brighter simply because you are in it.
+          </div>
+
+          <footer class="letter-footer">
+            <div class="signoff">With all the love in the universe, ✨</div>
+            <button type="button" class="btn-open-gift" id="btn-open-gift">
+              <span>Open Final Gift 🎁</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------------------
+         STAGE 6: FINAL GIFT UNBOXING (3D INTERACTIVE PRESENT)
+         -------------------------------------------------------------------- -->
+    <section id="stage-gift" class="stage-section hidden-stage">
+      <div class="gift-stage-wrapper">
+        <div class="section-badge">The Grand Finale</div>
+        <h2 class="section-title">A Keepsake For You</h2>
+        <p class="section-desc" style="margin-bottom: 24px;">Tap the 3D gift box to unwrap your final birthday surprise!</p>
+
+        <!-- 3D CSS Realistic Gift Box -->
+        <div class="gift-3d-box-container" title="Click to open your gift!">
+          <div class="box-light-beam"></div>
+          <div class="gift-cube">
+            <!-- Box Faces -->
+            <div class="cube-face face-front"></div>
+            <div class="cube-face face-back"></div>
+            <div class="cube-face face-left"></div>
+            <div class="cube-face face-right"></div>
+            <div class="cube-face face-bottom"></div>
+
+            <!-- Lid with 3D Ribbon & Bow -->
+            <div class="gift-lid">
+              <div class="lid-face lid-top">
+                <div class="lid-bow">
+                  <svg class="lid-bow-svg" viewBox="0 0 100 100" fill="#facc15">
+                    <circle cx="50" cy="50" r="14" fill="#eab308"/>
+                    <path d="M50 50 C20 10 0 40 40 50 Z" opacity="0.95"/>
+                    <path d="M50 50 C80 10 100 40 60 50 Z" opacity="0.95"/>
+                    <path d="M50 50 C20 90 0 60 40 50 Z" opacity="0.95"/>
+                    <path d="M50 50 C80 90 100 60 60 50 Z" opacity="0.95"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grand Keepsake Scroll Card (Unfurls upon opening) -->
+        <div class="keepsake-card">
+          <div class="keepsake-badge">Official Birthday Keepsake</div>
+          <h3 class="keepsake-title">Golden Wishes For</h3>
+          <div class="keepsake-name">Vennela</div>
+
+          <ul class="keepsake-wishes-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span><strong>Infinite Joy:</strong> May your days be filled with endless reasons to smile.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span><strong>Boundless Success:</strong> May every project and ambition flourish beyond measure.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span><strong>Lifelong Health & Magic:</strong> Cherished health, good energy, and true friendships always.</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span><strong>Unshakable Love:</strong> May you always remember how deeply appreciated you are.</span>
+            </li>
+          </ul>
+
+          <button id="btn-download-wish" class="btn-download-wish">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download Birthday Keepsake ✨</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       4. FLOATING BOTTOM NAVIGATION DOCK (BABY PINK)
+       ====================================================================== -->
+  <nav class="floating-dock" style="display: none;" aria-label="Experience Navigation">
+    <button class="dock-btn active" data-stage="stage-celebration" aria-label="Celebration">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+      </svg>
+      <span class="dock-tooltip">Celebration</span>
+    </button>
+    <button class="dock-btn" data-stage="stage-gallery" aria-label="Gallery">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+        <polyline points="21 15 16 10 5 21"></polyline>
+      </svg>
+      <span class="dock-tooltip">Memories</span>
+    </button>
+    <button class="dock-btn" data-stage="stage-message" aria-label="Letter">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      <span class="dock-tooltip">Letter</span>
+    </button>
+    <button class="dock-btn" data-stage="stage-gift" aria-label="Gift">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20 12 20 22 4 22 4 12"></polyline>
+        <rect x="2" y="7" width="20" height="5"></rect>
+        <line x1="12" y1="22" x2="12" y2="7"></line>
+        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+      </svg>
+      <span class="dock-tooltip">Present</span>
+    </button>
+  </nav>
+
+  <!-- ======================================================================
+       5. SCRIPTS (GSAP + AUDIO + PARTICLES + MAIN)
+       ====================================================================== -->
+  <!-- GSAP Core for Spring Timelines & Stagger Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Procedural Web Audio API Engine -->
+  <script src="js/audio.js"></script>
+
+  <!-- Canvas Particles & Confetti Engine -->
+  <script src="js/particles.js"></script>
+
+  <!-- Core App Controller -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
