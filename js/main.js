@@ -11,7 +11,10 @@
  * - 3D baby-pink & gold gift box unboxing
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+import './audio.js';
+import './particles.js';
+
+const startApp = () => {
   // ------------------------------------------------------------------------
   // 1. STATE & REFERENCES
   // ------------------------------------------------------------------------
@@ -1040,4 +1043,10 @@ With all the love in the universe, ✨
   document.body.addEventListener('click', () => {
     window.soundEngine.resumeContext();
   }, { once: true });
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startApp);
+} else {
+  startApp();
+}

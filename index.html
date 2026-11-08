@@ -751,19 +751,13 @@
   </nav>
 
   <!-- ======================================================================
-       5. SCRIPTS (GSAP + AUDIO + PARTICLES + MAIN)
+       5. SCRIPTS (GSAP + CORE APP BUNDLE)
        ====================================================================== -->
   <!-- GSAP Core for Spring Timelines & Stagger Animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-  <!-- Procedural Web Audio API Engine -->
-  <script src="js/audio.js"></script>
-
-  <!-- Canvas Particles & Confetti Engine -->
-  <script src="js/particles.js"></script>
-
-  <!-- Core App Controller -->
-  <script src="js/main.js"></script>
+  <!-- Core App Controller (Bundles audio, particles & interactions) -->
+  <script type="module" src="/js/main.js"></script>
 
 </body>
 </html>

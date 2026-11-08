@@ -1,10 +1,7 @@
-import { defineConfig } from 'vite';
-
-export default defineConfig({
+export default {
   server: {
     port: 5173,
     open: true,
     host: true
   }
-});
-
+};
